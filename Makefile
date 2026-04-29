@@ -18,6 +18,15 @@ ensure-uv:
 sync:
 	uv sync
 
+
+# ---- Run ----
+run-agent:
+	LLM_GROQ_API_KEY=$(LLM_GROQ_API_KEY) \
+	LLM_MODEL=llama-3.1-8b-instant \
+	LLM_TEMPERATURE=0.1 \
+	uv run python -m gen_agent.main
+
+
 # ---- Code Quality ----
 lint:
 	uv run ruff check .
