@@ -1,6 +1,6 @@
-from .groq_config import get_llm
+from .llm_provider import LLMProvider
 
-llm=get_llm()
+llm=LLMProvider.get()
 
 __all__=[
     "llm",

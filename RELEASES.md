@@ -5,3 +5,4 @@
 - Initialized the project structure and core schema design
 - Set up LLM integration and foundational agent framework
 - Implemented Pydantic-based configuration and data models
+- Setup Initial version of Agent (Input,validator)

@@ -1,8 +1,9 @@
-from langchain_core.messages import HumanMessage, SystemMessage
-from app.llm.groq_client import call_groq
-from app.schemas.plan_schema import ExecutionPlan
 import json
 import re
+from langchain_core.messages import HumanMessage, SystemMessage
+from src.schemas import AgentState
+from src.llm import llm
+from src.schemas import ExecutionPlan
 
 
 
@@ -77,30 +78,47 @@ Return STRICT JSON only:
 """
 
 
-def safe_extract_json(text: str):
-    try:
-        return json.loads(text)
-    except:
-        match = re.search(r"\{.*\}", text, re.DOTALL)
-        if match:
-            return json.loads(match.group())
-        raise ValueError(f"Invalid JSON from LLM: {text}")
 
 
-def planner_node(state):
+PROMPT = """
+Create execution plan.
+
+Allowed steps:
+- extract_ui_data
+- generate_query
+- execute_query
+- compare_results
+
+Return JSON:
+{
+  "steps": ["step1", "step2"]
+}
+"""
+
+
+def extract_json(text: str):
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    return json.loads(match.group())
+
+
+def planner_node(state:AgentState)->AgentState:
     messages = [
         SystemMessage(content=PROMPT),
-        HumanMessage(content=state["parsed_input"].model_dump_json())
+        HumanMessage(content=str(state.parsed_input))
     ]
 
-    response = call_groq(messages)
+    response = llm.invoke(messages)
 
-    plan_dict = safe_extract_json(response)
+    content = response.content
+
+    plan_dict = extract_json(content)
 
     validated_plan = ExecutionPlan(**plan_dict)
 
-    return {
-        **state,
-        "execution_plan": validated_plan,
-        "raw_llm_output": response
-    }
+    return AgentState(
+                user_input=state.user_input,
+                parsed_input=validated_plan,
+                execution_plan=validated_plan,
+                validation_error=None,
+                raw_llm_output=content
+            )

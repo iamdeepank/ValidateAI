@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
-from app.schemas.input_schema import ValidationRequest
-from app.schemas.plan_schema import ExecutionPlan
+from src.schemas import ValidationRequest
+from src.schemas import ExecutionPlan
 
 
 class AgentState(BaseModel):
