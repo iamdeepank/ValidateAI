@@ -1,0 +1,18 @@
+[project]
+name = "validateai"
+version = "0.1.1"
+description = "Validating MicroStrategy dashboard."
+readme = "README.md"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi==0.111.0",
+    "pydantic==2.7.4",
+    "pydantic-settings==2.2.1",
+    "uvicorn>=0.30.0",
+    "langchain>=0.2.0",
+    "langchain-core>=0.2.0",
+    "langchain-groq>=0.1.0",
+    "langgraph>=0.2.0",
+    "playwright>=1.40.0"
+]
