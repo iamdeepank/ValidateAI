@@ -40,11 +40,6 @@ def ui_node(state: AgentState) -> AgentState:
     # Run async scraper
     data = asyncio.run(run_scraper(parsed_input))
 
-    print("datttttt",data,"--end")
-    print("datt--type",type(data),"--end")
-
-
-
     return AgentState(
         user_input=state.user_input,
         parsed_input=state.parsed_input,

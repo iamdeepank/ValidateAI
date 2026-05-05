@@ -43,8 +43,9 @@ class TableauScraper:
         raise Exception("Tableau frame not found")
 
     # -------------------------------
-    # Apply Country Filter
+    # Apply Filter
     # -------------------------------
+    """for specific country """
     async def apply_country_filter(self, country="Canada"):
         print(f"Applying Country filter: {country}")
 
@@ -64,6 +65,53 @@ class TableauScraper:
         except Exception as e:
             print("Filter apply failed:", e)
 
+    # async def apply_filters(self, filters):
+    #     print(f"Applying filters: {filters}")
+    #     print("filters--type", type(filters))
+    #
+    #     # Normalize input (CRITICAL FIX)
+    #     if hasattr(filters, "model_dump"):
+    #         filters = filters.model_dump()
+    #
+    #     if not isinstance(filters, dict):
+    #         print(f"Invalid filters input: {filters}")
+    #         return
+    #
+    #     dropdowns = self.frame.locator("text=(All)")
+    #     count = await dropdowns.count()
+    #     print("Dropdowns found:", count)
+    #
+    #     dropdown_order = ["name", "role", "team", "country"]
+    #
+    #     try:
+    #         for idx, field in enumerate(dropdown_order):
+    #             print("fields--:", field)
+    #             print("fields--type--:", type(field))
+    #
+    #             value = filters.get(field)
+    #
+    #             if not value:
+    #                 print(f"Skipping {field}")
+    #                 continue
+    #
+    #             print(f"Applying {field}: {value}")
+    #
+    #             try:
+    #                 await dropdowns.nth(idx).click()
+    #                 await self.page.wait_for_timeout(settings.tableau.FILTER_WAIT)
+    #
+    #                 await self.frame.locator(f"text={value}").first.click()
+    #                 await self.page.wait_for_timeout(settings.tableau.POST_FILTER_WAIT)
+    #
+    #                 print(f"{field} applied successfully")
+    #
+    #             except Exception as e:
+    #                 print(f"{field} filter failed:", e)
+    #
+    #         print("All filters applied (AND condition)")
+    #
+    #     except Exception as e:
+    #         print("Filter application failed:", e)
     # -------------------------------
     # Extract & Structure Data
     # -------------------------------
@@ -121,18 +169,18 @@ class TableauScraper:
 # -------------------------------
 #  Runner (optional - keep for local testing)
 # -------------------------------
-async def run():
-
-    async with async_playwright() as p:
-        scraper = TableauScraper(settings.tableau.URL,settings.tableau.HEADLESS)
-
-        await scraper.launch(p)
-        await scraper.open_dashboard()
-        await scraper.get_frame()
-        await scraper.apply_country_filter("Canada")
-
-        data = await scraper.extract_data()
-
-        await scraper.close()
-
-        return data
+# async def run():
+#
+#     async with async_playwright() as p:
+#         scraper = TableauScraper(settings.tableau.URL,settings.tableau.HEADLESS)
+#
+#         await scraper.launch(p)
+#         await scraper.open_dashboard()
+#         await scraper.get_frame()
+#         await scraper.apply_country_filter("Canada")
+#
+#         data = await scraper.extract_data()
+#
+#         await scraper.close()
+#
+#         return data
