@@ -6,21 +6,53 @@ import re
 from src.schemas import AgentState
 
 
-PROMPT = """
+PROMPT1 = """
 Convert user input into STRICT JSON.
 
 Schema:
 {
   "filters": {
     "country": "string | null",
-    "date_from": "YYYY-MM-DD | null",
-    "date_to": "YYYY-MM-DD | null"
+    "team": "string | null",
+    "role": "string | null"
   },
-  "metrics": ["string"],
-  "validation_type": "string"
 }
 
 ONLY return JSON.
+"""
+
+PROMPT="""
+You are a JSON extraction system.
+
+Task:
+Extract filters from user input.
+
+Rules:
+- Return ONLY valid JSON
+- Do NOT write code
+- Do NOT explain anything
+- Do NOT include markdown
+
+Schema:
+{
+  "filters": {
+    "country": "string | null",
+    "team": "string | null",
+    "role": "string | null"
+    
+  },
+    "metrics": [
+    "string | null",
+    "string | null"
+  ],
+  "environments": [
+    "string | null",
+    "string | null"
+  ],
+  "dashboard": "string | null",
+  "screen_name": "string | null"
+}
+
 """
 
 
@@ -44,8 +76,6 @@ def input_node(state:AgentState)->AgentState:
     response = llm.invoke(messages)
 
     raw_content = response.content
-
-
     parsed_dict = extract_json(raw_content)
 
     validated = ValidationRequest(**parsed_dict)

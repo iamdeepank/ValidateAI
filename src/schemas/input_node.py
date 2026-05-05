@@ -1,3 +1,5 @@
+from email.policy import default
+
 from pydantic import BaseModel, Field, field_validator
 from typing import List, Optional
 from datetime import date
@@ -5,20 +7,15 @@ from datetime import date
 
 class Filters(BaseModel):
     country: Optional[str] = Field(default=None)
-    date_from: Optional[date] = Field(default=None)
-    date_to: Optional[date] = Field(default=None)
-
-    # @field_validator("date_to")
-    # def validate_date_range(cls, v, values):
-    #     if v and values.get("date_from") and v < values["date_from"]:
-    #         raise ValueError("date_to must be >= date_from")
-    #     return v
-
+    team: Optional[str] = Field(default=None)
+    role: Optional[str] = Field(default=None)
 
 class ValidationRequest(BaseModel):
-    filters: Filters
-    metrics: List[str] = Field(..., min_items=1)
-    validation_type: str = Field(...)
+    filters: Filters =Field(description="filters of the report.",default="No Filter")
+    metrics: List[str] =Field(description="metrics of the report.",default=None)
+    dashboard: str =Field(description="Name of the dashboard.",default=None)
+    screen_name: str =Field(description="Name of the dashboard screen.",default=None)
+    environments: List[str] =Field(description="environment of dashboard",default=None)
 
     class Config:
         extra = "forbid"              # prevent hallucinated fields

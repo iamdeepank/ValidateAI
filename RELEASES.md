@@ -1,5 +1,8 @@
 # Releases
 
+## 0.1.2
+- Enhance UI Agent and refine existing prompt
+
 ## 0.1.1
 
 - Initialized the project structure and core schema design

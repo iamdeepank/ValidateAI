@@ -165,33 +165,7 @@ SNOWFLAKE_DATABASE=your_database
 SNOWFLAKE_SCHEMA=your_schema
 
 # MicroStrategy
-MSTR_BASE_URL=https://your-mstr-instance.com
+MSTR_BASE_URL=https://mstr-instance.com
 MSTR_USERNAME=your_username
 MSTR_PASSWORD=your_password
 MSTR_PROJECT_ID=your_project_id
-
-# Optional
-SLACK_WEBHOOK_URL=https://hooks.slack.com/...
-
-
-
-mstr_validator/
-├── main.py                  # Entry point — run validation from CLI
-├── requirements.txt
-├── .env.example
-├── config/
-│   └── settings.py          # Centralised config & env loading
-├── agents/
-│   ├── filter_parser.py     # NL → structured filter JSON agent
-│   ├── ui_data_agent.py     # Playwright MSTR scraper agent
-│   ├── db_agent.py          # Snowflake query agent
-│   ├── comparator.py        # Diff / validation logic agent
-│   └── reporter.py          # LLM-generated report agent
-├── tools/
-│   ├── playwright_tool.py   # LangChain tool wrapper for Playwright
-│   └── snowflake_tool.py    # LangChain tool wrapper for Snowflake
-├── graph/
-│   └── workflow.py          # LangGraph state machine definition
-├── reports/                 # Output HTML/JSON reports saved here
-└── tests/
-    └── test_comparator.py   # Unit tests
