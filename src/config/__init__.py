@@ -1,5 +1,5 @@
-from .settings import llm_settings
+from .settings import settings
 
 __all__=[
-    "llm_settings",
+    "settings",
 ]

@@ -78,47 +78,59 @@ Return STRICT JSON only:
 """
 
 
+# PLANNER_PROMPT = """
+# You are a planning engine.
+#
+# Create an execution plan for validating dashboard data.
+#
+# Return only structured output.
+#
+# Rules:
+# - Always include these steps in order:
+#   1. extract_ui_data
+#   2. generate_sql
+#   3. execute_query
+#   4. compare_results
+# """
 
+PLANNER_PROMPT = """
+You are a planning engine.
 
-PROMPT = """
-Create execution plan.
+Return ONLY the following JSON structure:
 
-Allowed steps:
-- extract_ui_data
-- generate_query
-- execute_query
-- compare_results
-
-Return JSON:
 {
-  "steps": ["step1", "step2"]
+  "steps": ["extract_ui_data", "generate_sql", "execute_query", "compare_results"]
 }
-"""
 
+STRICT RULES:
+- ONLY return "steps"
+- DO NOT include filters, metrics, or any other fields
+- DO NOT explain anything
+- DO NOT add extra keys
+
+Always return exactly 4 steps in order.
+"""
 
 def extract_json(text: str):
     match = re.search(r"\{.*\}", text, re.DOTALL)
     return json.loads(match.group())
 
 
-def planner_node(state:AgentState)->AgentState:
-    messages = [
-        SystemMessage(content=PROMPT),
-        HumanMessage(content=str(state.parsed_input))
-    ]
+def planner_node(state: AgentState) -> AgentState:
 
-    response = llm.invoke(messages)
-
-    content = response.content
-
-    plan_dict = extract_json(content)
-
-    validated_plan = ExecutionPlan(**plan_dict)
+    plan = ExecutionPlan(
+        steps=[
+            "extract_ui_data",
+            "generate_sql",
+            "execute_query",
+            "compare_results"
+        ]
+    )
 
     return AgentState(
-                user_input=state.user_input,
-                parsed_input=validated_plan,
-                execution_plan=validated_plan,
-                validation_error=None,
-                raw_llm_output=content
-            )
+        user_input=state.user_input,
+        parsed_input=state.parsed_input,
+        execution_plan=plan,
+        validation_error=state.validation_error,
+        raw_llm_output=state.raw_llm_output
+    )

@@ -1,6 +1,6 @@
 from langgraph.graph import StateGraph, END
 from src.schemas import AgentState
-from src.agents.graph.nodes import input_node,planner_node,validator_node
+from src.agents.graph.nodes import input_node,planner_node,validator_node,ui_node
 from typing import Optional
 from langchain_core.runnables import Runnable
 
@@ -15,7 +15,9 @@ class GraphBuilder:
         """
         self.builder.add_node("input", input_node)
         self.builder.add_node("validate", validator_node)
-        # self.builder.add_node("plan", planner_node)
+        self.builder.add_node("plan", planner_node)
+        self.builder.add_node("ui", ui_node)
+
 
     def register_edges(self):
         """
@@ -23,8 +25,11 @@ class GraphBuilder:
         """
 
         self.builder.set_entry_point("input")
+
         self.builder.add_edge("input", "validate")
-        self.builder.add_edge("validate", END)
+        self.builder.add_edge("validate", "plan")
+        self.builder.add_edge("plan", "ui")
+        self.builder.add_edge("ui", END)
 
 
     @staticmethod

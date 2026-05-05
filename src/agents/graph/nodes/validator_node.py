@@ -12,7 +12,8 @@ def validator_node(state: AgentState) -> AgentState:
             user_input=state.user_input,
             parsed_input=state.parsed_input,
             execution_plan=state.execution_plan,
-            validation_error="Parsed input is missing"
+            validation_error="Parsed input is missing",
+            raw_llm_output = state.raw_llm_output,
         )
 
     try:
@@ -28,6 +29,7 @@ def validator_node(state: AgentState) -> AgentState:
             user_input=state.user_input,
             parsed_input=validated,
             execution_plan=state.execution_plan,
+            raw_llm_output=state.raw_llm_output,
             validation_error=None
         )
 
@@ -36,5 +38,6 @@ def validator_node(state: AgentState) -> AgentState:
             user_input=state.user_input,
             parsed_input=None,
             execution_plan=state.execution_plan,
+            raw_llm_output=state.raw_llm_output,
             validation_error=str(e)
         )

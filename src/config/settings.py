@@ -1,13 +1,11 @@
-from pydantic_settings import BaseSettings
-from pydantic import Field
-
-class LLMSettings(BaseSettings):
-    GROQ_API_KEY:str= Field(description="Groq api key.")
-    MODEL:str = Field(description="llm model name")
-    TEMPERATURE:float = Field(description="temprature value of model.")
-
-    class Config:
-        env_prefix = "LLM_"
+from src.config.llm_settings import LLMSettings
+from src.config.tableau_settings import TableauSettings
 
 
-llm_settings=LLMSettings()
+class Settings:
+    def __init__(self):
+        self.llm = LLMSettings()
+        self.tableau = TableauSettings()
+
+
+settings = Settings()

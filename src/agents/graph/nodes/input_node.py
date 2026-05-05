@@ -12,7 +12,7 @@ Convert user input into STRICT JSON.
 Schema:
 {
   "filters": {
-    "region": "string | null",
+    "country": "string | null",
     "date_from": "YYYY-MM-DD | null",
     "date_to": "YYYY-MM-DD | null"
   },
@@ -43,10 +43,10 @@ def input_node(state:AgentState)->AgentState:
 
     response = llm.invoke(messages)
 
-    content = response.content
+    raw_content = response.content
 
 
-    parsed_dict = extract_json(content)
+    parsed_dict = extract_json(raw_content)
 
     validated = ValidationRequest(**parsed_dict)
 
@@ -55,5 +55,5 @@ def input_node(state:AgentState)->AgentState:
             parsed_input=validated,
             execution_plan=state.execution_plan,
             validation_error=None,
-            raw_llm_output=content
+            raw_llm_output = raw_content
         )

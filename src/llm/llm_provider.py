@@ -1,5 +1,5 @@
 from langchain_groq import ChatGroq
-from src.config import llm_settings
+from src.config import settings
 
 
 class LLMProvider:
@@ -9,8 +9,8 @@ class LLMProvider:
     def get(cls) -> ChatGroq:
         if cls._instance is None:
             cls._instance = ChatGroq(
-                api_key=llm_settings.GROQ_API_KEY,
-                model=llm_settings.MODEL,
-                temperature=llm_settings.TEMPERATURE
+                api_key=settings.llm.GROQ_API_KEY,
+                model=settings.llm.MODEL,
+                temperature=settings.llm.TEMPERATURE
             )
         return cls._instance

@@ -55,7 +55,6 @@ def run_agent(request: RunAgentRequest):
 
         # 🔥 Invoke LangGraph
         result = graph.invoke(initial_state)
-
         logger.info("Graph execution completed")
 
         # ---------------------------
@@ -73,10 +72,19 @@ def run_agent(request: RunAgentRequest):
             else None
         )
 
+        ui_data = (
+            result["ui_data"]
+            if result.get("ui_data")
+            else None
+        )
+
+
         response = {
             "parsed_input": parsed_input,
             "execution_plan": execution_plan,
-            "validation_error": result.get("validation_error")
+            "raw_llm_output": result.get("raw_llm_output"),
+            "validation_error": result.get("validation_error"),
+            "ui_data": ui_data
         }
 
         return response

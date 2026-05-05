@@ -58,6 +58,12 @@ run-agent:
 
 ---
 
+
+import subprocess
+
+subprocess.run(["playwright", "install-deps", "chromium"])
+
+
 ### 🧠 How It Works
 
 * Environment variables are defined in `.bashrc` (global scope)

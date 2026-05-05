@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from src.schemas import ValidationRequest
 from src.schemas import ExecutionPlan
 
@@ -11,4 +11,5 @@ class AgentState(BaseModel):
     validation_error: Optional[str] = None
     # raw debug info (important for observability)
     raw_llm_output: Optional[str] = None
+    ui_data: Optional[List[Dict[str, Any]]] = None
 

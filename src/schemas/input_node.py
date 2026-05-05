@@ -4,7 +4,7 @@ from datetime import date
 
 
 class Filters(BaseModel):
-    region: Optional[str] = Field(default=None)
+    country: Optional[str] = Field(default=None)
     date_from: Optional[date] = Field(default=None)
     date_to: Optional[date] = Field(default=None)
 
@@ -21,5 +21,5 @@ class ValidationRequest(BaseModel):
     validation_type: str = Field(...)
 
     class Config:
-        extra = "forbid"              # 🚫 prevent hallucinated fields
-        validate_assignment = True   # 🔥 enforce runtime safety
+        extra = "forbid"              # prevent hallucinated fields
+        validate_assignment = True   # enforce runtime safety
