@@ -1,7 +1,9 @@
 # Releases
 
 ## 0.1.2
-- Enhance UI Agent and refine existing prompt
+- Enhanced the UI agent for improved reliability and performance
+- Refined prompt handling for better input interpretation
+- Added a Streamlit interface for interactive usage
 
 ## 0.1.1
 
