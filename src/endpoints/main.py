@@ -53,7 +53,7 @@ def run_agent(request: RunAgentRequest):
             "raw_llm_output": None
         }
 
-        # 🔥 Invoke LangGraph
+        # Invoke LangGraph
         result = graph.invoke(initial_state)
         logger.info("Graph execution completed")
 

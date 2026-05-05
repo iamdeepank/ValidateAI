@@ -15,7 +15,7 @@ async def run_scraper(parsed_input):
         await scraper.open_dashboard()
         await scraper.get_frame()
 
-        # 🔥 Use filter from parsed input (no enhancement)
+        # Use filter from parsed input (no enhancement)
         country = "Canada"
         if parsed_input and parsed_input.filters.country:
             country = parsed_input.filters.country
@@ -37,7 +37,7 @@ def ui_node(state: AgentState) -> AgentState:
             "validation_error": "Parsed input missing for UI node"
         })
 
-    # 🔥 Run async scraper
+    # Run async scraper
     data = asyncio.run(run_scraper(parsed_input))
 
     print("datttttt",data,"--end")
