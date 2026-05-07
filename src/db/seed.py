@@ -13,8 +13,8 @@ PlayerMetric(
     screen_name="Overall",
 
     country="Canada",
-    team="Faze",
-    role="IGL-opener",
+    team="FaZe",
+    role="IGL-Opener",
 
     player_name="Twistzz",
 
@@ -31,7 +31,7 @@ PlayerMetric(
 ),
 
 PlayerMetric(
-    environment="prod",
+    environment="Preprod",
     dashboard="Tableau",
     screen_name="Overall",
 
@@ -49,6 +49,7 @@ PlayerMetric(
 
     ct_last12_delta=-0.07,
     t_last12_delta=0.08,
+
 
     snapshot_date="2024-01-01"
 ),

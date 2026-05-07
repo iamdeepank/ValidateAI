@@ -36,7 +36,7 @@ VALIDATION REQUEST SCHEMA
   },
 
   "metric_filters": [
-    "string"
+    "string | None"
   ],
 
   "validation_config": {
@@ -145,8 +145,8 @@ EXAMPLE OUTPUT
     "player_name": null
   },
   "metric_filters": [
-    "t_target_last12",
-    "ct_target_last12"
+    "string | None",
+    "sting | None"
   ],
   "validation_config": {
     "comparison_type": "row_level",

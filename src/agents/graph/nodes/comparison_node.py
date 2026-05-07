@@ -5,6 +5,7 @@ from src.schemas.comparison_schema import (
     ComparisonSummary,
     MetricComparisonResult
 )
+from src.utils import VALID_METRICS
 
 
 def comparison_node(state: AgentState) -> AgentState:
@@ -73,11 +74,39 @@ def comparison_node(state: AgentState) -> AgentState:
         # -----------------------------------
         # Metric Mapping
         # -----------------------------------
-        metrics = [
-            ("t_target_last12", "t_target_last12"),
-            ("ct_target_last12", "ct_target_last12"),
+
+        requested_metrics = [
+            metric
+            for metric in (
+                state.parsed_input.metric_filters
+            )
+
+            if metric in VALID_METRICS
         ]
 
+        if not requested_metrics:
+            AgentState(
+                user_input=state.user_input,
+                parsed_input=state.parsed_input,
+                execution_plan=state.execution_plan,
+                validation_error="No valid metrics requested",
+                raw_llm_output=state.raw_llm_output,
+                ui_data=state.ui_data,
+                generated_sql=state.generated_sql,
+                db_data=state.db_data,
+
+            )
+
+        # -----------------------------------
+        # Dynamic Metric Mapping
+        # -----------------------------------
+        metrics = [
+            (metric, metric)
+            for metric in requested_metrics
+        ]
+
+        print("metricssss",metrics)
+        print("metricssss typee",type(metrics))
         # -----------------------------------
         # Compare Metrics
         # -----------------------------------

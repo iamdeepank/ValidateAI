@@ -116,46 +116,122 @@ class TableauScraper:
     # Extract & Structure Data
     # -------------------------------
     async def extract_data(self):
+
         print("Extracting visible data...")
 
         try:
+
             text = await self.frame.inner_text("body")
 
-            lines = [l.strip() for l in text.split("\n") if l.strip()]
+            lines = [
+                l.strip()
+                for l in text.split("\n")
+                if l.strip()
+            ]
 
-            if "IGL-Opener" not in lines:
-                print("Target data not found")
+            print("\n--- DATA PREVIEW ---\n")
+            print("\n".join(lines[:80]))
+
+            # -----------------------------------
+            # Find Start
+            # -----------------------------------
+            start = None
+
+            for idx, line in enumerate(lines):
+
+                if line in [
+                    "IGL-Opener",
+                    "Support",
+                    "AWPer",
+                    "Closer",
+                    "Opener",
+                    "Rifler",
+                    "IGL-AWPer",
+                    "IGL-Closer",
+                    "IGL-Rifler"
+                ]:
+                    start = idx
+                    break
+
+            if start is None:
+                print("Could not identify table")
+
                 return []
 
-            start = lines.index("IGL-Opener")
+            # -----------------------------------
+            # Detect Row Count
+            # -----------------------------------
+            roles = []
 
-            print("start:---", start)
+            role_keywords = [
+                "IGL-Opener",
+                "Support",
+                "AWPer",
+                "Closer",
+                "Opener",
+                "Rifler",
+                "IGL-AWPer",
+                "IGL-Closer",
+                "IGL-Rifler"
+            ]
 
-            roles = lines[start:start+2]
-            names = lines[start+2:start+4]
-            teams = lines[start+4:start+6]
-            t_last = lines[start+6:start+10]
-            ct_last = lines[start+10:start+12]
+            current = start
 
+            while current < len(lines):
+
+                if lines[current] in role_keywords:
+                    roles.append(lines[current])
+                    current += 1
+                else:
+                    break
+
+            row_count = len(roles)
+
+            print(f"Detected Rows: {row_count}")
+
+            # -----------------------------------
+            # Dynamic Slicing
+            # -----------------------------------
+            names = lines[current:current + row_count]
+            current += row_count
+
+            teams = lines[current:current + row_count]
+            current += row_count
+
+            t_target = lines[current:current + row_count]
+            current += row_count
+
+            ct_target = lines[current:current + row_count]
+            current += row_count
+
+            # -----------------------------------
+            # Build Structured Table
+            # -----------------------------------
             result = []
 
-            for i in range(len(roles)):
+            for i in range(row_count):
                 result.append({
                     "role": roles[i],
                     "player_name": names[i],
                     "team": teams[i],
-                    "t_target_last12": t_last[i],
-                    "ct_target_last12": ct_last[i]
+                    "t_target_last12": t_target[i],
+                    "ct_target_last12": ct_target[i]
                 })
 
-            print("\n--- STRUCTURED DATA ---\n")
-            for r in result:
-                print(r, "\n")
+            # -----------------------------------
+            # Pretty Print
+            # -----------------------------------
+            print("\n--- STRUCTURED TABLE ---\n")
+
+            for row in result:
+                print(row)
 
             return result
 
         except Exception as e:
+
             print("Extraction failed:", e)
+
             return []
 
     # -------------------------------
