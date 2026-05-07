@@ -142,10 +142,10 @@ class TableauScraper:
             for i in range(len(roles)):
                 result.append({
                     "role": roles[i],
-                    "name": names[i],
+                    "player_name": names[i],
                     "team": teams[i],
-                    "t_target": t_last[i],
-                    "ct_target": ct_last[i]
+                    "t_target_last12": t_last[i],
+                    "ct_target_last12": ct_last[i]
                 })
 
             print("\n--- STRUCTURED DATA ---\n")

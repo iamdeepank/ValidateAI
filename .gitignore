@@ -240,3 +240,4 @@ examples/pipeline/output
 .gitconfig-personal
 .idea
 uv.lock
+validateai.db

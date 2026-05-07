@@ -1,18 +1,17 @@
-from pydantic import BaseModel, Field
-from typing import List, Literal
+from pydantic import BaseModel
+from typing import List
 
+class ExecutionStep(BaseModel):
 
-AllowedStep = Literal[
-    "extract_ui_data",
-    "generate_sql",
-    "execute_query",
-    "compare_results"
-]
+    step_id: int
+    step_name: str
+    node_name: str
+    depends_on: List[int]
+    critical: bool = True
 
 
 class ExecutionPlan(BaseModel):
-    steps: List[AllowedStep] = Field(..., min_items=1)
 
-    class Config:
-        extra = "forbid"
-        validate_assignment = True
+    workflow_id: str
+    execution_strategy: str
+    steps: List[ExecutionStep]
