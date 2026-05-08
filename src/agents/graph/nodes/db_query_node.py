@@ -20,9 +20,8 @@ def db_query_node(state: AgentState) -> AgentState:
         # Refine Query
         # ---------------------------------
         refined_query = refine_demo_sql(
-            state.generated_sql
+            state
         )
-
         # ---------------------------------
         # Allow ONLY SELECT
         # ---------------------------------

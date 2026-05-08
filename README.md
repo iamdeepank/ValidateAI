@@ -14,8 +14,6 @@ db_query
  ↓
 comparison
  ↓
-audit
- ↓
 report
  ↓
 END

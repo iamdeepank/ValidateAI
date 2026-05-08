@@ -1,30 +1,13 @@
 import re
+from src.schemas import AgentState
 
+def refine_demo_sql(state: AgentState) -> str:
+    parsed_input = state.parsed_input
 
-def refine_demo_sql(query: str) -> str:
+    if parsed_input and parsed_input.entity_filters.country:
+        country = parsed_input.entity_filters.country
 
-    # -----------------------------
-    # normalize spacing
-    # -----------------------------
-    query = " ".join(query.split())
-
-    # -----------------------------
-    # extract country condition
-    # -----------------------------
-    country_match = re.search(
-        r"country\\s*=\\s*'([^']+)'",
-        query,
-        flags=re.IGNORECASE
-    )
-
-    country = None
-
-    if country_match:
-        country = country_match.group(1)
-
-    # -----------------------------
-    # build refined query
-    # -----------------------------
+    print("countryyyyyy",country)
     refined_query = "SELECT * FROM player_metrics"
 
     if country:
