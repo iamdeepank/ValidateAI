@@ -1,6 +1,7 @@
 from langgraph.graph import StateGraph, END
 from src.schemas import AgentState
-from src.agents.graph.nodes import input_node,planner_node,validator_node,ui_node
+from src.agents.graph.nodes import input_node,planner_node,validator_node,ui_node,sql_generation_node,db_query_node
+from src.agents.graph.nodes import comparison_node,report_node
 from typing import Optional
 from langchain_core.runnables import Runnable
 
@@ -17,6 +18,11 @@ class GraphBuilder:
         self.builder.add_node("validate", validator_node)
         self.builder.add_node("plan", planner_node)
         self.builder.add_node("ui", ui_node)
+        self.builder.add_node("sql_generation", sql_generation_node)
+        self.builder.add_node("db_query_data", db_query_node)
+        self.builder.add_node("comparison_node", comparison_node)
+        self.builder.add_node("report_node", report_node)
+
 
 
     def register_edges(self):
@@ -29,7 +35,11 @@ class GraphBuilder:
         self.builder.add_edge("input", "validate")
         self.builder.add_edge("validate", "plan")
         self.builder.add_edge("plan", "ui")
-        self.builder.add_edge("ui", END)
+        self.builder.add_edge("ui","sql_generation")
+        self.builder.add_edge("sql_generation","db_query_data")
+        self.builder.add_edge("db_query_data","comparison_node")
+        self.builder.add_edge("comparison_node","report_node")
+        self.builder.add_edge("report_node", END)
 
 
     @staticmethod

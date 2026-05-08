@@ -15,9 +15,10 @@ ensure-uv:
 	fi
 
 # Install dependencies (creates venv automatically)
-sync:
-	uv sync
 
+install:
+	uv sync
+	uv run playwright install
 
 # ---- Run ----
 run-agent:
@@ -34,6 +35,16 @@ run-ui:
 	LLM_TEMPERATURE=0.1 \
 	TABLEAU_URL=https://public.tableau.com/app/profile/harry.richards4213/viz/PositionsDatabaseNER0cs/PositionsDatabaseNER0cs \
 	uv run streamlit run src/tools/streamlit_ui.py
+
+seed-db:
+	LLM_GROQ_API_KEY=$(LLM_GROQ_API_KEY) \
+	LLM_MODEL=llama-3.1-8b-instant \
+	LLM_TEMPERATURE=0.1 \
+	TABLEAU_URL=https://public.tableau.com/app/profile/harry.richards4213/viz/PositionsDatabaseNER0cs/PositionsDatabaseNER0cs \
+	uv run python -m src.db.seed
+
+sqlite-view:
+	sqlite3 validateai.db
 
 # ---- Code Quality ----
 lint:

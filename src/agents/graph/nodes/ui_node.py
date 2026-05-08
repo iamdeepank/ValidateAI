@@ -17,8 +17,8 @@ async def run_scraper(parsed_input):
 
         # Use filter from parsed input (no enhancement)
         country = "Canada"
-        if parsed_input and parsed_input.filters.country:
-            country = parsed_input.filters.country
+        if parsed_input and parsed_input.entity_filters.country:
+            country = parsed_input.entity_filters.country
 
         await scraper.apply_country_filter(country)
 

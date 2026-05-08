@@ -1,4 +1,6 @@
 # app/main.py
+from email.contentmanager import raw_data_manager
+from http.client import responses
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
@@ -6,7 +8,7 @@ import logging
 
 from src.agents import graph
 from src.schemas import RunAgentRequest, RunAgentResponse
-
+from src.tools.streamlit_ui import user_input
 
 # ---------------------------
 # Logging Setup
@@ -45,13 +47,9 @@ def run_agent(request: RunAgentRequest):
         logger.info(f"Received request: {request.user_input}")
 
         # Initial graph state
-        initial_state = {
-            "user_input": request.user_input,
-            "parsed_input": None,
-            "execution_plan": None,
-            "validation_error": None,
-            "raw_llm_output": None
-        }
+        initial_state=RunAgentRequest(
+            user_input=request.user_input
+        )
 
         # Invoke LangGraph
         result = graph.invoke(initial_state)
@@ -78,14 +76,24 @@ def run_agent(request: RunAgentRequest):
             else None
         )
 
+        sql_generate = (
+            result["generated_sql"]
+            if result.get("generated_sql")
+            else None
+        )
 
-        response = {
-            "parsed_input": parsed_input,
-            "execution_plan": execution_plan,
-            "raw_llm_output": result.get("raw_llm_output"),
-            "validation_error": result.get("validation_error"),
-            "ui_data": ui_data
-        }
+        response=RunAgentResponse(
+            parsed_input=parsed_input,
+            execution_plan=execution_plan,
+            raw_llm_output=result.get("raw_llm_output"),
+            validation_error=result.get("validation_error"),
+            ui_data=ui_data,
+            sql_generation=sql_generate,
+            db_data=result.get("db_data"),
+            comparison_result=result.get("comparison_result"),
+            final_report=result.get("final_report")
+
+        )
 
         return response
 
