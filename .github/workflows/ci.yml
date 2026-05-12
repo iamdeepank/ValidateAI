@@ -1,0 +1,103 @@
+name: ValidateAI CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version:
+          - "3.11"
+          - "3.12"
+
+    steps:
+
+      # ----------------------------------------
+      # Checkout Repo
+      # ----------------------------------------
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # ----------------------------------------
+      # Setup Python
+      # ----------------------------------------
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # ----------------------------------------
+      # Install uv
+      # ----------------------------------------
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      # ----------------------------------------
+      # Install Dependencies
+      # ----------------------------------------
+
+      - name: Install Dependencies
+        run: |
+          uv sync --all-groups
+
+      # ----------------------------------------
+      # Install Playwright Browsers
+      # ----------------------------------------
+
+      - name: Install Playwright Browsers
+        run: |
+          uv run playwright install chromium
+
+      # ----------------------------------------
+      # Ruff Lint
+      # ----------------------------------------
+
+      - name: Ruff Check
+        run: |
+          uv run ruff check .
+
+      # ----------------------------------------
+      # Ruff Format Check
+      # ----------------------------------------
+
+      - name: Ruff Format Check
+        run: |
+          uv run ruff format . --check
+
+      # ----------------------------------------
+      # Run Unit Tests
+      # ----------------------------------------
+
+      - name: Run Tests
+        env:
+          LLM_GROQ_API_KEY: dummy_key_for_tests
+
+        run: |
+          uv run pytest -v
+
+      # ----------------------------------------
+      # Coverage
+      # ----------------------------------------
+
+      - name: Coverage
+        env:
+          LLM_GROQ_API_KEY: dummy_key_for_tests
+
+        run: |
+          uv run pytest --cov=src --cov-report=term-missing

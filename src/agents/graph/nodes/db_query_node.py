@@ -1,10 +1,10 @@
 from sqlalchemy import text
-
+from pathlib import Path
 from src.schemas import AgentState
 from src.utils import refine_demo_sql
 from src.tools import execute_query
 from src.db import engine
-
+import json
 
 def db_query_node(state: AgentState) -> AgentState:
 
@@ -30,17 +30,26 @@ def db_query_node(state: AgentState) -> AgentState:
                 "Only SELECT queries are allowed"
             )
 
-        print("\n[DB QUERY NODE]")
-        print("Refined SQL:")
-        print(refined_query)
-
         # ---------------------------------
         # Execute Query
         # ---------------------------------
 
         rows = execute_query(refined_query)
 
-        print("Fetched Rows:", len(rows))
+        artifact_dir = Path(
+            state.artifact_dir
+        )
+
+        with open(
+                artifact_dir / "db_data.json",
+                "w"
+        ) as f:
+
+            json.dump(
+                rows,
+                f,
+                indent=2
+            )
 
         # ---------------------------------
         # Return Updated State
@@ -53,7 +62,8 @@ def db_query_node(state: AgentState) -> AgentState:
             raw_llm_output=state.raw_llm_output,
             ui_data=state.ui_data,
             generated_sql=state.generated_sql,
-            db_data=rows
+            db_data=rows,
+            artifact_dir=str(state.artifact_dir)
 
         )
 

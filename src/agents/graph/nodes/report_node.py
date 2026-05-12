@@ -1,5 +1,6 @@
 from datetime import datetime
-
+from pathlib import Path
+import json
 from src.schemas import AgentState
 from src.schemas import FinalReport
 
@@ -61,6 +62,20 @@ def report_node(state: AgentState) -> AgentState:
     # -----------------------------------
     # Return Updated State
     # -----------------------------------
+    artifact_dir = Path(
+        state.artifact_dir
+    )
+
+    with open(
+            artifact_dir / "report_node.json",
+            "w"
+    ) as f:
+        json.dump(
+            report.model_dump(),
+            f,
+            indent=2
+        )
+
     return AgentState(
         user_input=state.user_input,
         parsed_input=state.parsed_input,
@@ -72,5 +87,4 @@ def report_node(state: AgentState) -> AgentState:
         db_data=state.db_data,
         comparison_result=state.comparison_result,
         final_report=report
-
     )

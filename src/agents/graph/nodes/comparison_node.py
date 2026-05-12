@@ -6,7 +6,8 @@ from src.schemas.comparison_schema import (
     MetricComparisonResult
 )
 from src.utils import VALID_METRICS
-
+from pathlib import Path
+import json
 
 def comparison_node(state: AgentState) -> AgentState:
 
@@ -205,9 +206,25 @@ def comparison_node(state: AgentState) -> AgentState:
         metric_results=metric_results
     )
 
+
     # -----------------------------------
     # Return Updated State
     # -----------------------------------
+    artifact_dir = Path(
+        state.artifact_dir
+    )
+
+    with open(
+            artifact_dir / "comparison_result.json",
+            "w"
+    ) as f:
+
+        json.dump(
+            comparison_result.model_dump(),
+            f,
+            indent=2
+        )
+
     return AgentState(
         user_input=state.user_input,
         parsed_input=state.parsed_input,
@@ -217,6 +234,6 @@ def comparison_node(state: AgentState) -> AgentState:
         ui_data=state.ui_data,
         generated_sql=state.generated_sql,
         db_data=state.db_data,
-        comparison_result=comparison_result
-
+        comparison_result=comparison_result,
+        artifact_dir=str(state.artifact_dir)
     )

@@ -20,4 +20,5 @@ class AgentState(BaseModel):
     final_report: Optional[Any] = None
     comparison_result: Optional[ComparisonResult] = None
     final_report: Optional[FinalReport] = None
+    artifact_dir: Optional[str] = None
 

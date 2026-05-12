@@ -1,5 +1,9 @@
 # Releases
-### 0.1.3
+## 0.1.4
+- Introduced Basic structure files for this repo
+- Setup artifacts for the agents
+
+## 0.1.3
 - Introduced enterprise-grade LangGraph orchestration with multi-agent workflow for UI-to-DB dashboard validation.
 - Added Playwright-based UI extraction, dynamic SQL generation, SQLite integration, comparison engine, and structured reporting.
 - Enhanced Streamlit UI with execution trace visualization, KPI cards, comparison tables, and multi-turn chat-based validation experience.

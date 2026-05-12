@@ -1,0 +1,38 @@
+repos:
+
+  # ----------------------------------------
+  # Ruff Lint
+  # ----------------------------------------
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.0
+
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+      - id: ruff-format
+
+  # ----------------------------------------
+  # Basic File Hygiene
+  # ----------------------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-added-large-files
+
+  # ----------------------------------------
+  # Pytest
+  # ----------------------------------------
+  - repo: local
+
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: uv run pytest tests/unit -q
+        language: system
+        pass_filenames: false
+        always_run: true

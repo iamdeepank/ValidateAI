@@ -1,6 +1,7 @@
 import asyncio
 from playwright.async_api import async_playwright
-
+from pathlib import Path
+import json
 from src.schemas import AgentState
 from src.tools import TableauScraper
 
@@ -40,11 +41,26 @@ def ui_node(state: AgentState) -> AgentState:
     # Run async scraper
     data = asyncio.run(run_scraper(parsed_input))
 
+    artifact_dir = Path(
+        state.artifact_dir
+    )
+
+    with open(
+            artifact_dir / "ui_data.json",
+            "w"
+    ) as f:
+        json.dump(
+            data,
+            f,
+            indent=2
+        )
+
     return AgentState(
         user_input=state.user_input,
         parsed_input=state.parsed_input,
         execution_plan=state.execution_plan,
         validation_error=None,
         raw_llm_output=state.raw_llm_output,
-        ui_data=data
+        ui_data=data,
+        artifact_dir=str(state.artifact_dir)
     )

@@ -17,7 +17,7 @@ ensure-uv:
 # Install dependencies (creates venv automatically)
 
 install:
-	uv sync
+	uv sync --all-groups
 	uv run playwright install
 
 # ---- Run ----
