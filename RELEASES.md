@@ -1,6 +1,7 @@
 # Releases
 ## 0.1.4
-- Introduced Basic structure for this repo.
+- Introduced Basic structure files for this repo
+- Setup artifacts for the agents
 
 ## 0.1.3
 - Introduced enterprise-grade LangGraph orchestration with multi-agent workflow for UI-to-DB dashboard validation.

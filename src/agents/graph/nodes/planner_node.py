@@ -56,10 +56,35 @@ def planner_node(state: AgentState) -> AgentState:
         ]
     )
 
+    # ----------------------------------------
+    # Reuse existing artifact folder
+    # ----------------------------------------
+
+    print(" state.artifact_dir===", state.artifact_dir)
+    print(" state.artifact_dir===", type(state.artifact_dir))
+    artifact_dir = Path(
+        state.artifact_dir
+    )
+
+    # ----------------------------------------
+    # Save execution plan
+    # ----------------------------------------
+
+    with open(
+            artifact_dir / "execution_plan.json",
+            "w"
+    ) as f:
+        json.dump(
+            plan.model_dump(),
+            f,
+            indent=2
+        )
+
     return AgentState(
             user_input=state.user_input,
             parsed_input=state.parsed_input,
             execution_plan=plan,
             validation_error=state.validation_error,
-            raw_llm_output=state.raw_llm_output
+            raw_llm_output=state.raw_llm_output,
+            artifact_dir=state.artifact_dir
         )

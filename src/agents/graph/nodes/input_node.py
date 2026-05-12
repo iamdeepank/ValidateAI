@@ -52,7 +52,7 @@ def input_node(state:AgentState)->AgentState:
             execution_plan=state.execution_plan,
             validation_error=None,
             raw_llm_output = raw_content,
-            artifact_manager= str(
+            artifact_dir= str(
             artifact_manager.run_dir
     )
         )
