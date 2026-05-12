@@ -1,22 +1,54 @@
 # ValidateAI
 
-input
+> AI-powered dashboard validation platform for validating UI report data against backend databases using Agentic AI, LangGraph orchestration, Playwright automation, and structured reconciliation workflows.
+
+---
+
+# 📌 Overview
+
+ValidateAI is an enterprise-style validation framework designed to automate dashboard and report validation workflows.
+
+The system enables users to:
+
+- Validate dashboard/UI data against backend database systems
+- Use natural language queries for validation requests
+- Extract UI data dynamically using Playwright
+- Generate backend SQL queries automatically
+- Compare UI vs DB results
+- Store execution history and audit trails
+- Generate structured validation reports
+
+The platform is designed for validating:
+
+- Tableau dashboards
+- MicroStrategy reports
+- Power BI dashboards
+- Enterprise analytics systems
+- BI reconciliation workflows
+
+---
+
+# 🧠 Architecture
+
+```text
+User
  ↓
-validate
+Streamlit UI
  ↓
-plan
+LangGraph Orchestrator
+ ├── Input Agent
+ ├── Validation Agent
+ ├── Planning Agent
+ ├── UI Extraction Agent
+ ├── SQL Generation Agent
+ ├── DB Query Agent
+ ├── Comparison Agent
+ └── Report Agent
  ↓
-ui
+SQLite / Enterprise Database
  ↓
-sql_generation
- ↓
-db_query
- ↓
-comparison
- ↓
-report
- ↓
-END
+Validation Report
+```
 
 ## 🔐 Environment Variables Setup
 
@@ -127,6 +159,54 @@ SELECT * FROM player_metrics;
 * Restart terminal or run `source ~/.bashrc` if variables are not picked up
 
 ---
+
+
+# 🚀 Enterprise Roadmap
+
+Planned future enhancements:
+
+- Async parallel graph execution
+- Memory-enabled conversational validation
+- Dashboard metadata registry
+- Multi-dashboard support
+- Alerting integrations
+- OpenTelemetry tracing
+- LangSmith integration
+- CI/CD validation pipelines
+
+---
+
+# ⚠️ Important Design Principles
+
+## ✅ DO
+
+- Keep graph nodes deterministic
+- Use structured outputs
+- Preserve immutable state
+- Isolate external systems
+- Persist execution history
+
+---
+
+## ❌ DO NOT
+
+- Dynamically execute generated Python
+- Allow unrestricted SQL execution
+- Hide validation logic inside prompts
+- Mutate shared graph state
+
+---
+
+# 🤝 Contributing
+
+Contributions, improvements, and architectural suggestions are welcome.
+
+
+---
+
+# 👨‍💻 Author
+
+ValidateAI Team
 
 
 ## Rough Knowledge

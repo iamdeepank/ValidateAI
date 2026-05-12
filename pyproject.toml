@@ -1,9 +1,48 @@
 [project]
 name = "validateai"
-version = "0.1.3"
-description = "Validating MicroStrategy dashboard."
+version = "0.1.4"
+description = "Agentic AI platform for dashboard validation, UI-data reconciliation, and automated data quality verification."
+authors = [
+    {name ="Deepank Choudhary", email="deepank.choudhary@zs.com"},
+    {name ="Deepank Choudhary", email="deepank.choudhary@Nagarro.com"},
+]
 readme = "README.md"
 requires-python = ">=3.12"
+
+keywords = [
+    "ai",
+    "GenAI",
+    "agentic-ai",
+    "langchain",
+    "langgraph",
+    "playwright",
+    "dashboard-validation",
+    "data-quality",
+    "streamlit",
+    "automation"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Database",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Utilities",
+    "Framework :: AsyncIO",
+    "Environment :: Web Environment",
+    "Typing :: Typed",
+]
 
 dependencies = [
     "fastapi==0.111.0",
@@ -19,3 +58,14 @@ dependencies = [
     "sqlalchemy>=2.0.49",
     "pandas>=3.0.2",
 ]
+
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-mock>=3.14.0",
+    "httpx>=0.28.0",
+    "faker>=37.0.0"
+]
+
