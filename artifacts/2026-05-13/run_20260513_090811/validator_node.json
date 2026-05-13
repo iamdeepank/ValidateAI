@@ -1,0 +1,18 @@
+{
+  "dashboard": "Tableau",
+  "screen_name": "Overall",
+  "environment": "Preprod",
+  "entity_filters": {
+    "country": "Canada",
+    "team": null,
+    "role": "AWPer",
+    "player_name": null
+  },
+  "metric_filters": [
+    "t_target_last12"
+  ],
+  "validation_config": {
+    "comparison_type": "row_level",
+    "tolerance": 0.05
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "workflow_id": "validation_workflow_v1",
+  "execution_strategy": "sequential",
+  "steps": [
+    {
+      "step_id": 1,
+      "step_name": "extract_ui_data",
+      "node_name": "ui_node",
+      "depends_on": [],
+      "critical": true
+    },
+    {
+      "step_id": 2,
+      "step_name": "generate_sql",
+      "node_name": "sql_generation_node",
+      "depends_on": [
+        1
+      ],
+      "critical": true
+    },
+    {
+      "step_id": 3,
+      "step_name": "execute_query",
+      "node_name": "db_query_node",
+      "depends_on": [
+        2
+      ],
+      "critical": true
+    },
+    {
+      "step_id": 4,
+      "step_name": "compare_results",
+      "node_name": "comparison_node",
+      "depends_on": [
+        1,
+        3
+      ],
+      "critical": true
+    },
+    {
+      "step_id": 5,
+      "step_name": "generate_report",
+      "node_name": "report_node",
+      "depends_on": [
+        4
+      ],
+      "critical": true
+    }
+  ]
+}

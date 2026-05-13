@@ -1,0 +1,1 @@
+Hey, validate the Tableau Overall dashboard data for all players from Canada in the Preprod environment? I specifically want to compare the T Target Last12 & CT Target Last12 metrics between the UI dashboard and backend database records. Ignore any players where the team filter is not available, and make sure this is done using row-level comparison logic. 

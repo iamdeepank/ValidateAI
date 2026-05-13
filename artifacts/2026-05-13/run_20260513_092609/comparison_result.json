@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "summary": {
+    "total_ui_rows": 2,
+    "total_db_rows": 2,
+    "matched_rows": 2,
+    "failed_rows": 0
+  },
+  "metric_results": [
+    {
+      "player_name": "twistzz",
+      "metric": "t_target_last12",
+      "ui_value": 1.01,
+      "db_value": 1.01,
+      "difference": 0.0,
+      "tolerance": 0.05,
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "player_name": "naf",
+      "metric": "t_target_last12",
+      "ui_value": 1.08,
+      "db_value": 1.08,
+      "difference": 0.0,
+      "tolerance": 0.05,
+      "status": "PASS",
+      "reason": null
+    }
+  ]
+}

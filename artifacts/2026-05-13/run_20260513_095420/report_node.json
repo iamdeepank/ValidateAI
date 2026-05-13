@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-05-13 09:56:29.123463",
+  "status": "FAIL",
+  "dashboard": "Tableau",
+  "environment": "Preprod",
+  "screen_name": "Overall",
+  "summary": {
+    "total_ui_rows": 2,
+    "total_db_rows": 2,
+    "matched_rows": 2,
+    "failed_rows": 1
+  },
+  "failed_metrics": [
+    {
+      "player_name": "tn1r",
+      "metric": "ct_target_last12",
+      "ui_value": 1.11,
+      "db_value": 1.31,
+      "difference": 0.19999999999999996,
+      "tolerance": 0.05,
+      "status": "FAIL",
+      "reason": "Difference 0.19999999999999996 exceeded tolerance 0.05"
+    }
+  ],
+  "passed_metrics": [
+    {
+      "player_name": "gr1ks",
+      "metric": "t_target_last12",
+      "ui_value": 1.07,
+      "db_value": 1.07,
+      "difference": 0.0,
+      "tolerance": 0.05,
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "player_name": "gr1ks",
+      "metric": "ct_target_last12",
+      "ui_value": 1.11,
+      "db_value": 1.11,
+      "difference": 0.0,
+      "tolerance": 0.05,
+      "status": "PASS",
+      "reason": null
+    },
+    {
+      "player_name": "tn1r",
+      "metric": "t_target_last12",
+      "ui_value": 1.07,
+      "db_value": 1.07,
+      "difference": 0.0,
+      "tolerance": 0.05,
+      "status": "PASS",
+      "reason": null
+    }
+  ],
+  "generated_sql": "SELECT * FROM player_metrics WHERE dashboard = 'Tableau' AND screen_name = 'Overall' AND environment = 'Preprod' AND country = 'Belarus' AND role = 'AWPer' AND (t_target_last12 IS NOT NULL OR ct_target_last12 IS NOT NULL)"
+}

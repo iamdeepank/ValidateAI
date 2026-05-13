@@ -1,4 +1,7 @@
 # Releases
+## 0.1.5
+- Make this service Window Compatible
+
 ## 0.1.4
 - Introduced Basic structure files for this repo
 - Setup artifacts for the agents
