@@ -1,0 +1,38 @@
+[
+  {
+    "id": 3,
+    "environment": "Preprod",
+    "dashboard": "Tableau",
+    "screen_name": "Overall",
+    "country": "Argentina",
+    "team": "9z",
+    "role": "AWPer",
+    "player_name": "meyern",
+    "hltv_wr": 30.0,
+    "age": 36,
+    "t_target_last12": 1.06,
+    "ct_target_last12": 1.11,
+    "ct_last12_delta": -0.07,
+    "t_last12_delta": 0.08,
+    "snapshot_date": "2024-01-01",
+    "created_at": "2026-05-13T09:36:33.035186"
+  },
+  {
+    "id": 4,
+    "environment": "Preprod",
+    "dashboard": "Tableau",
+    "screen_name": "Overall",
+    "country": "Argentina",
+    "team": "9z",
+    "role": "Opener",
+    "player_name": "luchov",
+    "hltv_wr": 30.0,
+    "age": 36,
+    "t_target_last12": 1.09,
+    "ct_target_last12": 1.11,
+    "ct_last12_delta": -0.07,
+    "t_last12_delta": 0.08,
+    "snapshot_date": "2024-01-01",
+    "created_at": "2026-05-13T09:36:33.035187"
+  }
+]

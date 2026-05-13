@@ -29,12 +29,18 @@ run-agent:
 	uv run uvicorn src.endpoints.main:app --reload
 
 run-ui:
-	PYTHONPATH=. \
 	LLM_GROQ_API_KEY=$(LLM_GROQ_API_KEY) \
 	LLM_MODEL=llama-3.1-8b-instant \
 	LLM_TEMPERATURE=0.1 \
 	TABLEAU_URL=https://public.tableau.com/app/profile/harry.richards4213/viz/PositionsDatabaseNER0cs/PositionsDatabaseNER0cs \
-	uv run streamlit run src/tools/streamlit_ui.py
+	uv run streamlit run streamlit_ui.py
+
+seed-window:
+	set LLM_GROQ_API_KEY="" && set LLM_MODEL=llama-3.1-8b-instant && set LLM_TEMPERATURE=0.1 && set TABLEAU_URL=https://public.tableau.com/app/profile/harry.richards4213/viz/PositionsDatabaseNER0cs/PositionsDatabaseNER0cs && uv run python -m src.db.seed
+
+run-ui-window:
+	set LLM_GROQ_API_KEY="" && set LLM_MODEL=llama-3.1-8b-instant && set LLM_TEMPERATURE=0.1 && set TABLEAU_URL=https://public.tableau.com/app/profile/harry.richards4213/viz/PositionsDatabaseNER0cs/PositionsDatabaseNER0cs && uv run streamlit run streamlit_ui.py
+
 
 seed-db:
 	LLM_GROQ_API_KEY=$(LLM_GROQ_API_KEY) \

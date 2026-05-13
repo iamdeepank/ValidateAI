@@ -1,0 +1,16 @@
+[
+  {
+    "role": "IGL-Opener",
+    "player_name": "Twistzz",
+    "team": "FaZe",
+    "t_target_last12": "1.01",
+    "ct_target_last12": "1.13"
+  },
+  {
+    "role": "Support",
+    "player_name": "NAF",
+    "team": "Liquid",
+    "t_target_last12": "1.08",
+    "ct_target_last12": "1.09"
+  }
+]

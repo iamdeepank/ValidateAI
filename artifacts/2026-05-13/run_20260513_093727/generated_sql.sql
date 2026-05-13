@@ -1,0 +1,1 @@
+SELECT * FROM player_metrics WHERE dashboard = 'Tableau' AND screen_name = 'Overall' AND environment = 'Preprod' AND role = 'AWPer' AND (t_target_last12 IS NOT NULL OR ct_target_last12 IS NOT NULL)

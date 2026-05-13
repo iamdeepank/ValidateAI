@@ -3,7 +3,13 @@ import streamlit as st
 
 from src.agents import graph
 from src.schemas import AgentState
+import platform
+import asyncio
 
+if platform.system() == "Windows":
+    asyncio.set_event_loop_policy(
+        asyncio.WindowsProactorEventLoopPolicy()
+    )
 # =========================================================
 # PAGE CONFIG
 # =========================================================

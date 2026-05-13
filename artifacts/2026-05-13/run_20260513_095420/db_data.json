@@ -1,0 +1,38 @@
+[
+  {
+    "id": 5,
+    "environment": "Preprod",
+    "dashboard": "Tableau",
+    "screen_name": "Overall",
+    "country": "Belarus",
+    "team": "BIG",
+    "role": "AWPer",
+    "player_name": "gr1ks",
+    "hltv_wr": 30.0,
+    "age": 36,
+    "t_target_last12": 1.07,
+    "ct_target_last12": 1.11,
+    "ct_last12_delta": -0.07,
+    "t_last12_delta": 0.08,
+    "snapshot_date": "2024-01-01",
+    "created_at": "2026-05-13T09:36:33.035188"
+  },
+  {
+    "id": 6,
+    "environment": "Preprod",
+    "dashboard": "Tableau",
+    "screen_name": "Overall",
+    "country": "Belarus",
+    "team": "Spirit",
+    "role": "Closer",
+    "player_name": "tN1R",
+    "hltv_wr": 30.0,
+    "age": 36,
+    "t_target_last12": 1.07,
+    "ct_target_last12": 1.31,
+    "ct_last12_delta": -0.07,
+    "t_last12_delta": 0.08,
+    "snapshot_date": "2024-01-01",
+    "created_at": "2026-05-13T09:36:33.035189"
+  }
+]

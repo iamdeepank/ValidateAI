@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "environment": "Preprod",
+    "dashboard": "Tableau",
+    "screen_name": "Overall",
+    "country": "Canada",
+    "team": "FaZe",
+    "role": "IGL-Opener",
+    "player_name": "Twistzz",
+    "hltv_wr": 30.0,
+    "age": 36,
+    "t_target_last12": 1.01,
+    "ct_target_last12": 1.13,
+    "ct_last12_delta": -0.07,
+    "t_last12_delta": 0.08,
+    "snapshot_date": "2024-01-01",
+    "created_at": "2026-05-13T09:23:16.612844"
+  },
+  {
+    "id": 2,
+    "environment": "Preprod",
+    "dashboard": "Tableau",
+    "screen_name": "Overall",
+    "country": "Canada",
+    "team": "Liquid",
+    "role": "Support",
+    "player_name": "NAF",
+    "hltv_wr": 30.0,
+    "age": 36,
+    "t_target_last12": 1.08,
+    "ct_target_last12": 1.09,
+    "ct_last12_delta": -0.07,
+    "t_last12_delta": 0.08,
+    "snapshot_date": "2024-01-01",
+    "created_at": "2026-05-13T09:23:16.612861"
+  }
+]
