@@ -30,9 +30,9 @@ run-agent:
 
 run-ui:
 	LLM_GROQ_API_KEY=$(LLM_GROQ_API_KEY) \
-	LLM_MODEL="llama-3.1-8b-instant" \
+	LLM_MODEL=llama-3.1-8b-instant \
 	LLM_TEMPERATURE=0.1 \
-	TABLEAU_URL="https://public.tableau.com/app/profile/harry.richards4213/viz/PositionsDatabaseNER0cs/PositionsDatabaseNER0cs" \
+	TABLEAU_URL=https://public.tableau.com/app/profile/harry.richards4213/viz/PositionsDatabaseNER0cs/PositionsDatabaseNER0cs \
 	uv run streamlit run streamlit_ui.py
 
 seed-window:
